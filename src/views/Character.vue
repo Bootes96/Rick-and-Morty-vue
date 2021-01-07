@@ -1,20 +1,34 @@
 <template>
   <div>
     <Navbar />
-    <Cards />
+    <CharacterCards :characters='data'/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Navbar from '../components/Navbar'
-import Cards from '../components/Cards'
+import CharacterCards from '../components/CharacterCards'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Characters',
+  data: () => ({
+    characters: []
+  }),
+  created() {
+    this.fetchData('character')
+  },
+  methods: {
+    ...mapActions(["fetchData"])
+  },
+  computed: {
+    //getting characters from the store
+    ...mapGetters(['data'])
+  },
   components: {
     Navbar,
-    Cards
+    CharacterCards
   }
 }
 </script>

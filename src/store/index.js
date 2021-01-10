@@ -9,20 +9,21 @@ export default new Vuex.Store({
     data: []
   },
   mutations: {
-    setData: (state, data) => (state.data = data)
+    setData: (state, result) => (state.data = result)
   },
   actions: {
-    async fetchData({commit}, data = 'character') {
+    async fetchData({commit}, {category, pageNum}) {
       try {
-        const res = await axios.get(`https://rickandmortyapi.com/api/${data}`)
-        commit('setData', res.data.results)
+        const res = await axios.get(`https://rickandmortyapi.com/api/${category}/?page=${pageNum}`)
+        res.data.info.category = category
+        commit('setData', res.data)
       } catch (error) {
         throw new Error(error)
       }
     }
   },
   getters: {
-    data(state) {
+    categoryData(state) {
       return state.data
     }
   },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <CharacterCards :characters='data'/>
+    <CharacterCards :characters='categoryData'/>
   </div>
 </template>
 
@@ -13,18 +13,12 @@ import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Characters',
-  data: () => ({
-    characters: []
-  }),
-  created() {
-    this.fetchData('character')
-  },
-  methods: {
-    ...mapActions(["fetchData"])
+  async created() {
+    await this.$store.dispatch('fetchData', {category: 'character', pageNum: 1})
   },
   computed: {
     //getting characters from the store
-    ...mapGetters(['data'])
+    ...mapGetters(['categoryData'])
   },
   components: {
     Navbar,

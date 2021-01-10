@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="row">
-        <div class="col s4" v-for="character in characters" :key="character.id">
+        <div class="col s4" v-for="character in characters.results" :key="character.id">
           <div class="card">
             <div class="card-image">
             	<img :src='character.image'>
@@ -17,14 +17,19 @@
           </div>
         </div>
       </div>
+      <Pagination />
     </div>
 </template>
 
 <script>
+import Pagination from '../components/Pagination'
 
 export default {
     name: 'CharacterCards',
-    props: ['characters']
+    props: ['characters'],
+    components: {
+      Pagination
+    }
 }
 </script>
 

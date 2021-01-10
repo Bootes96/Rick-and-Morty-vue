@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Character from '../views/Character.vue'
-import Episode from '../views/Episode.vue'
-import Location from '../views/Location.vue'
 
 Vue.use(VueRouter)
 
@@ -28,6 +26,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  base: '/rick-and-morty',
   mode: 'history',
   routes
 })

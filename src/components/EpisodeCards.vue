@@ -13,13 +13,18 @@
             </div>
           </div>
         </div>
+        <Pagination />
       </div>
     </div>
 </template>
 
 <script>
+import Pagination from '../components/Pagination'
 export default {
     name: 'EpisodeCards',
+    components: {
+      Pagination
+    }
 }
 </script>
 

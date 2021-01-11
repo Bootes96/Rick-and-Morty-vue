@@ -1,14 +1,14 @@
 <template>
   <div>
     <Navbar />
-    <CharacterCards :characters='categoryData'/>
+    <CharacterCards :characters='categoryData.results'/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Navbar from '../components/Navbar'
-import CharacterCards from '../components/CharacterCards'
+import Navbar from '@/components/Navbar'
+import CharacterCards from '@/components/CharacterCards'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {

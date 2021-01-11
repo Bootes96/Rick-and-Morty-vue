@@ -3,10 +3,13 @@
     v-model="page"
     :page-count="pageCount"
     :click-handler="clickPageHandler"
-    :prev-text="'Prev'"
-    :next-text="'Next'"
+    :prev-text="'<i class=material-icons>chevron_left</i>'"
+    :prev-class="'waves-effect'"
+    :next-text="'<i class=material-icons>chevron_right</i>'"
+    :next-class="'waves-effect'"
     :container-class="'pagination'"
     :page-class="'waves-effect'"
+    :active-class="'cyan lighten-2'"
   />
 </template>
 
@@ -37,3 +40,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .pagination {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+</style>

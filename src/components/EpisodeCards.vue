@@ -1,20 +1,20 @@
 <template>
     <div class="container">
       <div class="row">
-        <div class="col s4">
+        <div class="col s4" v-for="episode in episodes" :key="episode.key">
           <div class="card cyan lighten-2">
             <div class="card-content">
-				<h2 class="card-title">Pilot</h2>
-				<p>Air date: December 2, 2013</p>
-				<p>Episode: S01E01</p>
+              <h2 class="card-title">{{episode.name}}</h2>
+              <p>Air date: {{episode.air_date}}</p>
+              <p>Episode: {{episode.episode}}</p>
             </div>
             <div class="card-action">
-              <a class="white-text" href="#">More info</a>
+              <a @click="$router.push(`/episode/${episode.id}`)" class="white-text">More info</a>
             </div>
           </div>
         </div>
-        <Pagination />
       </div>
+      <Pagination />
     </div>
 </template>
 
@@ -22,6 +22,7 @@
 import Pagination from '../components/Pagination'
 export default {
     name: 'EpisodeCards',
+    props: ['episodes'],
     components: {
       Pagination
     }

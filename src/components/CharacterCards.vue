@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="row">
-        <div class="col s4" v-for="character in characters.results" :key="character.id">
+        <div class="col s4" v-for="character in characters" :key="character.id">
           <div class="card">
             <div class="card-image">
             	<img :src='character.image'>
@@ -12,7 +12,7 @@
 							<p>Status: {{character.status}}</p>
             </div>
             <div class="card-action">
-              <a class="cyan-text text-darken-2" href="#">More info</a>
+              <a @click="$router.push(`/character/${character.id}`)" class="cyan-text text-darken-2">More info</a>
             </div>
           </div>
         </div>

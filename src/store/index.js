@@ -6,10 +6,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    data: []
+    data: [],
+    singleData: {}
   },
   mutations: {
-    setData: (state, result) => (state.data = result)
+    setData: (state, result) => (state.data = result),
+    setSingleData: (state, result) => (state.singleData = result)
   },
   actions: {
     async fetchData({commit}, {category, pageNum}) {
@@ -20,11 +22,22 @@ export default new Vuex.Store({
       } catch (error) {
         throw new Error(error)
       }
+    },
+    async fetchSingle({commit}, {category, id}) {
+      try {
+        const res = await axios.get(`https://rickandmortyapi.com/api/${category}/${id}`)
+        commit('setSingleData', res.data)
+      } catch (error) {
+        throw new Error(error)
+      }
     }
   },
   getters: {
     categoryData(state) {
       return state.data
+    },
+    singleData(state) {
+      return state.singleData
     }
   },
   modules: {

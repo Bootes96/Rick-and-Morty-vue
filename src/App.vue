@@ -15,4 +15,8 @@
 .container {
   margin-top: 2rem;
 }
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
 </style>

@@ -9,9 +9,13 @@
 					<p>Status: {{singleData.status}}</p>
 					<p>Gender: {{singleData.gender}}</p>
 					<p>Location: {{singleData.location.name}}</p>
-				<ul class="episodes row">
-					<li></li>
-				</ul>
+				<p>Episodes:</p>
+				<div v-if="multipleData.length > 1"> 
+					<ul class="episodes" v-for="episode in multipleData" :key="episode.id">
+						<li>{{episode.name}}</li>
+					</ul>
+				</div>
+				<span class="episode" v-else>{{multipleData.name}}</span>
 				</div>
 			</div>
 		</div>
@@ -24,15 +28,29 @@ export default {
 	name: 'character',
 	data: () => ({
 		loading: true,
+		multipleData: []
 	}),
 	async mounted() {
 		const id = this.$route.params.id
 		await this.$store.dispatch('fetchSingle', {category: 'character', id})
-		console.log(this.$store.state.singleData.episode);
 		this.loading = false
+		this.episodes()
 	},
 	computed: {
-		...mapGetters(['singleData'])
+		...mapGetters(['singleData']),
+	},
+	methods: {
+		async episodes() {
+			const episodesLink = this.singleData.episode
+			const ids = []
+		 	episodesLink.forEach(item => {
+			 	const id = parseInt(item.match(/\d+/)) //получаем id (Number) из строки
+				ids.push(id)
+			})
+			const category = 'episode'
+			const episodes = await this.$store.dispatch('fetchMultipleData', {category, ids})
+			this.multipleData = this.$store.state.multipleData
+		}
 	}
 }
 </script>
@@ -50,5 +68,17 @@ export default {
 		p {
 			font-size: 1.5rem;
 		}
+	}
+
+	.episodes {
+		li {
+			font-size: 1.2rem;
+			margin-left: 1rem;
+			}
+	}
+
+	.episode {
+		font-size: 1.2rem;
+		margin-left: 1rem;
 	}
 </style>

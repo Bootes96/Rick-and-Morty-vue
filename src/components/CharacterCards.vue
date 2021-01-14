@@ -3,18 +3,17 @@
       <div class="row">
         <div class="col s4" v-for="character in characters" :key="character.id">
           <div class="card">
-            <div class="card-image">
+            <div class="card-image" @click="$router.push(`/character/${character.id}`)">
             	<img :src='character.image'>
             </div>
-            <div class="card-content">
-							<h4 class="card-title cyan-text text-darken-2">{{character.name}}</h4>
-							<p>Species: {{character.species}}</p>
-							<p>Status: {{character.status}}</p>
-            </div>
-            <div class="card-action">
-              <a @click="$router.push(`/character/${character.id}`)" class="cyan-text text-darken-2">More info</a>
-            </div>
           </div>
+          <h4 @click="$router.push(`/character/${character.id}`)" class="card-title cyan-text text-darken-2">{{character.name}}</h4>
+					<p class="card-text">Species: {{character.species}}</p>
+					<p class="card-text" > Status: <span 
+            :class="[character.status === 'Dead' ? 'red-text' 
+            : (character.status === 'Alive') ? 'green-text' : 'yellow-text']">
+          {{character.status}}
+          </span></p>
         </div>
       </div>
       <Pagination />
@@ -29,17 +28,9 @@ export default {
     props: ['characters'],
     components: {
       Pagination
-    }
+    },
 }
 </script>
 
 <style lang='scss' scoped>
-	.card {
-		&-content {
-			padding-top: 0;
-      p {
-        font-size: 1.5rem;
-      }
-		}
-	}
 </style>

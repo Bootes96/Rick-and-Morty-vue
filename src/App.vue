@@ -19,4 +19,18 @@
 h1, h2, h3, h4, h5 {
   margin: 0;
 }
+
+.card {
+  &-title {
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+  &-image {
+    cursor: pointer;
+  }
+  &-text {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}
 </style>

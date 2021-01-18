@@ -1,27 +1,32 @@
 <template>
-	<div class="container">
-		<div class="row">
-			<div v-if="!loading">
-				<div class="col s6">
-					<h3>{{singleData.name}}</h3>
-					<p>Species: {{singleData.air_date}}</p>
-					<p>Status: {{singleData.episode}}</p>
-					<p>Characters:</p>
-					<div v-if="multipleData.length > 1"> 
-						<ul v-for="character in multipleData" :key="character.id">
-							<li>{{character.name}}</li>
+	<div>
+		<Preloader v-if="loading"/>
+		<div v-else class="container">
+			<div class="row">
+				<div>
+					<div class="col s6">
+						<h3>{{singleData.name}}</h3>
+						<p>Species: {{singleData.air_date}}</p>
+						<p>Status: {{singleData.episode}}</p>
+						<p>Characters:</p>
+						<div v-if="multipleData.length > 1"> 
+							<ul class="bullet" v-for="character in multipleData" :key="character.id">
+								<li>{{character.name}}</li>
+							</ul>
+						</div>
+						<ul v-else class="bullet"> 
+							<li >{{multipleData.name}}</li>
 						</ul>
-					</div>
-					<span class="episode" v-else>{{multipleData.name}}</span>
+						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Preloader from '@/components/Preloader'
 export default {
 	name: 'episode',
 	data: () => ({
@@ -50,6 +55,9 @@ export default {
 			const episodes = await this.$store.dispatch('fetchMultipleData', {category, ids})
 			this.multipleData = this.$store.state.multipleData
 		}
+	},
+	components: {
+		Preloader
 	}
 }
 </script>

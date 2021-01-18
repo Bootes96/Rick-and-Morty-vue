@@ -1,22 +1,29 @@
 <template>
-	<div class="container">
-		<div class="row">
-			<div class="character" v-if="!loading">
-				<img class="character__img col s6" :src="singleData.image" alt="">
-				<div class="character__content col s6">
-					<h3>{{singleData.name}}</h3>
-					<p>Species: {{singleData.species}}</p>
-					<p>Status: {{singleData.status}}</p>
-					<p>Gender: {{singleData.gender}}</p>
-					<p>Location: {{singleData.location.name}}</p>
-				<p>Episodes:</p>
-				<div v-if="multipleData.length > 1"> 
-					<ul class="episodes" v-for="episode in multipleData" :key="episode.id">
-						<li>{{episode.name}}</li>
-					</ul>
+	<div>
+		<Preloader v-if="loading"/>
+		<div v-else class="container">
+			<div class="row">
+				<div class="character" v-if="!loading">
+					<img class="character__img col s6" :src="singleData.image" alt="">
+					<div class="character__content col s6">
+						<h3>{{singleData.name}}</h3>
+						<p>Species: {{singleData.species}}</p>
+						<p>Status: {{singleData.status}}</p>
+						<p>Gender: {{singleData.gender}}</p>
+						<p>Location: {{singleData.location.name}}</p>
+					</div>
 				</div>
-				<span class="episode" v-else>{{multipleData.name}}</span>
-				</div>
+			</div>
+			<div class="row">
+			<p>Episodes:</p>
+			<div v-if="multipleData.length > 1"> 
+				<ul class="bullet" v-for="episode in multipleData" :key="episode.id">
+					<li>{{episode.name}}</li>
+				</ul>
+			</div>
+			<ul v-else class="bullet"> 
+				<li >{{multipleData.name}}</li>
+			</ul>
 			</div>
 		</div>
 	</div>
@@ -24,7 +31,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Preloader from '../../components/Preloader.vue'
 export default {
+  components: { Preloader },
 	name: 'character',
 	data: () => ({
 		loading: true,
@@ -65,10 +74,11 @@ export default {
 		h3 {
 			margin-bottom: 1.5rem;
 		}
+	}
+
 		p {
 			font-size: 1.5rem;
 		}
-	}
 
 	.episodes {
 		li {

@@ -1,7 +1,9 @@
 <template>
-    <div class="container">
-      <div class="row card-list">
-        <div class="col s4 card-wrapper" v-for="location in locations" :key="location.id">
+  <div>
+    <Preloader v-if="!locations.length"/>
+    <div v-else class="container">
+      <div class="cards">
+        <div class="card-wrapper" v-for="location in locations" :key="location.key">
           <div class="card cyan lighten-2">
             <div class="card-content">
               <h2 class="card-title">{{location.name}}</h2>
@@ -16,40 +18,22 @@
       </div>
       <Pagination />
     </div>
+  </div>
 </template>
 
 <script>
 import Pagination from '../components/Pagination'
+import Preloader from './Preloader.vue'
 
 export default {
     name: 'LocationCards',
     props: ['locations'],
     components: {
-      Pagination
+      Pagination,
+      Preloader
     }
 }
 </script>
 
 <style lang='scss' scoped>
-	.card {
-    color: #fff;
-    &-list {
-      display: flex;
-      flex-wrap: wrap;
-    } 
-    &-wrapper {
-      display: flex;
-    }
-		&-content {
-      p {
-          font-size: 1.5rem;
-          max-width: 250px;
-        }
-	  }
-		&-title {
-			padding-top: 1.5rem;
-			font-weight: bold;
-      max-width: 250px;
-		}
-	}
 </style>

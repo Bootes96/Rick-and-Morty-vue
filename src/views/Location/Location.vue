@@ -1,18 +1,23 @@
 <template>
-	<div class="container">
-		<div class="row">
-			<div v-if="!loading">
-				<div class="col s6">
-					<h3>{{singleData.name}}</h3>
-					<p>Species: {{singleData.type}}</p>
-					<p>Status: {{singleData.dimension}}</p>
-					<p>Residents:</p>
-					<div v-if="multipleData.length > 1"> 
-						<ul v-for="character in multipleData" :key="character.id">
-							<li>{{character.name}}</li>
+	<div>
+		<Preloader v-if="loading"/>
+		<div v-else class="container">
+			<div class="row">
+				<div v-if="!loading">
+					<div class="col s6">
+						<h3>{{singleData.name}}</h3>
+						<p>Species: {{singleData.type}}</p>
+						<p>Status: {{singleData.dimension}}</p>
+						<p>Residents:</p>
+						<div v-if="multipleData.length > 1"> 
+							<ul class="bullet" v-for="character in multipleData" :key="character.id">
+								<li>{{character.name}}</li>
+							</ul>
+						</div>
+						<ul v-else class="bullet"> 
+							<li >{{multipleData.name}}</li>
 						</ul>
 					</div>
-					<span class="episode" v-else>{{multipleData.name}}</span>
 				</div>
 			</div>
 		</div>
@@ -21,7 +26,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Preloader from '../../components/Preloader.vue'
 export default {
+  components: { Preloader },
 	name: 'location',
 	data: () => ({
 		loading: true,

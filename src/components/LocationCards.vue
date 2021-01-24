@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Preloader v-if="!locations.length"/>
+    <Preloader v-if="!locations"/>
     <div v-else class="container">
       <div class="cards">
         <div class="card-wrapper" v-for="location in locations" :key="location.key">

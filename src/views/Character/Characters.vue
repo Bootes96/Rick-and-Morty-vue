@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar @fetch-characters="fetchCharacters"/>
     <CharacterCards :characters='categoryData.results'/>
   </div>
 </template>
@@ -13,8 +13,13 @@ import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Characters',
-  async created() {
-    await this.$store.dispatch('fetchData', {category: 'character', pageNum: 1})
+  created() {
+    this.fetchCharacters()
+  },
+  methods: {
+    async fetchCharacters() {
+      await this.$store.dispatch('fetchData', {category: 'character', pageNum: 1})
+    }
   },
   computed: {
     //getting characters from the store

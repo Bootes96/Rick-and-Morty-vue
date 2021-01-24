@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Preloader v-if="!characters.length"/>
+    <Preloader v-if="!characters"/>
     <div v-else class="container">
       <div class="cards">
         <div class="card-wrapper" v-for="character in characters" :key="character.key">

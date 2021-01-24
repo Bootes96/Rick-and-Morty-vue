@@ -3,7 +3,7 @@
     <nav class="cyan lighten-2">
     	<div class="nav-wrapper row">
 			<div class="col s3">
-      		<router-link to="/" class="brand-logo left">Rick and Morty</router-link>
+      		<router-link to="/" class="brand-logo left"><span @click="startPage">Rick and Morty</span></router-link>
 				</div>
 				<ul class="col s5 nav-list">
 				<router-link
@@ -29,7 +29,13 @@ export default {
 			{title: 'Episodes', url: '/episode'},
 			{title: 'Locations', url: '/location'}
 		]
-	})
+	}),
+	methods: {
+		async startPage() {
+			await this.$store.dispatch('fetchData', {category: 'character', pageNum: 1})
+			this.$router.push('?page=1')
+		}
+	}
 }
 </script>
 

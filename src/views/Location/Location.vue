@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<Navbar />
 		<Preloader v-if="loading"/>
 		<div v-else class="container">
 			<div class="row">
@@ -27,8 +28,12 @@
 <script>
 import { mapGetters } from 'vuex'
 import Preloader from '../../components/Preloader.vue'
+import Navbar from '@/components/Navbar'
 export default {
-  components: { Preloader },
+  components: { 
+		Preloader,
+		Navbar 
+	},
 	name: 'location',
 	data: () => ({
 		loading: true,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Preloader v-if="!episodes.length"/>
+    <Preloader v-if="!episodes"/>
     <div v-else class="container">
       <div class="cards">
         <div class="card-wrapper" v-for="episode in episodes" :key="episode.key">

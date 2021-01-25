@@ -1,5 +1,7 @@
 # rick-and-morty-v
 
+DEMO: https://nervous-williams-519a24.netlify.app/
+
 ## Project setup
 ```
 npm install
